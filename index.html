@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Webview Form</title>
+</head>
+<body>
+  <form id="myForm">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="date">Date:</label><br>
+    <input type="date" id="date" name="date"><br>
+    <button type="button" onclick="submitForm()">Submit</button>
+  </form>
+  <script>
+    function submitForm() {
+      var form = document.getElementById('myForm');
+      var data = {
+        name: form.name.value,
+        date: form.date.value
+      };
+      fetch('https://script.google.com/macros/s/AKfycbzLP1F4ay8pCPFfCS8aDOcdpZO2tAU2k7a4GTGyo83mkx_SPowQJkbRzK3bEL__8uTO/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(response => response.json()).then(result => {
+        alert('Form submitted successfully!');
+      }).catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  </script>
+</body>
+</html>
